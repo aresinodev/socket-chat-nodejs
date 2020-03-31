@@ -28,7 +28,7 @@ class Users {
 
     personDeleted(id) {
         let deletedPerson = this.getPerson(id);
-        this.persons = this.persons.filter(item => item.id !== i);
+        this.persons = this.persons.filter(item => item.id !== id);
 
         return deletedPerson;
     }

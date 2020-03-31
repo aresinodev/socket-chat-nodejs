@@ -12,37 +12,27 @@ var user = {
     room: params.get("room")
 };
 
-socket.on('connect', function() {
-    console.log('Conectado al servidor');
+socket.on("connect", function() {
+    console.log("Conectado al servidor");
 
     socket.emit("inChat", user, function(resp) {
-        console.log("Users connected", resp);
+        renderUsers(resp);
     });
 });
 
 // escuchar
-socket.on('disconnect', function() {
-
-    console.log('Perdimos conexión con el servidor');
-
+socket.on("disconnect", function() {
+    console.log("Perdimos conexión con el servidor");
 });
-
-
-// Enviar información
-// socket.emit('enviarMensaje', {
-//     usuario: 'Fernando',
-//     mensaje: 'Hola Mundo'
-// }, function(resp) {
-//     console.log('respuesta server: ', resp);
-// });
 
 // Escuchar información
-socket.on('createMessage', function(message) {
-    console.log('Servidor:', message);
+socket.on("createMessage", function(message) {
+    renderMessages(message, false);
+    scrollBottom();
 });
 
-socket.on('listPersons', function (persons) {
-    console.log(persons);
+socket.on("listPersons", function (persons) {
+    renderUsers(resp);
 });
 
 // Mensajes privados.
